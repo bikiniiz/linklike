@@ -12,4 +12,11 @@ class LinkController {
         link.save()
         redirect(action: "index")
     }
+    
+	def vote(){
+		def link = Link.get(params.id)
+		link.increaseVote()
+		link.save()
+		redirect(action: "index")
+	}
 }
