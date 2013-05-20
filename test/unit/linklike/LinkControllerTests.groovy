@@ -11,7 +11,21 @@ import org.junit.*
 @TestFor(LinkController)
 class LinkControllerTests {
 
-    void testSomething() {
-       fail "Implement me"
+    void testCreateLink() {
+       params.title = 'facebook'
+       params.url = 'www.facebook.com'
+	   controller.create()
+	   
+	   assert Link.count == 1
     }
+	
+	void testIncreaseVote(){
+		def link = new Link(title: 'facebook', url: 'www.facebook.com')
+		link.save()
+		
+		params.url = 'www.facebook.com'
+		controller.Vote()
+		
+		assertEquals 1 , Link.get(1).vote
+	}
 }
